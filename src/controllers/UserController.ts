@@ -16,12 +16,12 @@ class UserController{
       const {user} = await this.userService.login(email, password);
       const response = APIResponse("Success login", 200, "success", user) 
       res.status(200).json(response)
-  } catch (error: any) {
-      res.status(500).json({
-          status : "Failed to login",
-          error :  error.message 
-      })
-  }
+    }catch (error: any) {
+        res.status(500).json({
+            status : "Failed to login",
+            error :  error.message 
+        })
+    }
   }
 
   public list = async (req: Request, res: Response): Promise<void> => {
@@ -40,7 +40,7 @@ class UserController{
       const user = await this.userService.create(userDetail)
       res.status(201).json(user)
     }catch(err){
-      res.status(500).json({message: 'error retrieving users', error: err})
+      res.status(500).json({message: 'error creating users', error: err})
     }
   }
 

@@ -48,12 +48,19 @@ export class UserService{
   async create(userDetail: UserAttributes) : Promise<UserAttributes>{
     
     await regisSchema.validate(userDetail);
-
-    const user = await MtUser.create({
+    
+    await MtUser.create({
       ...userDetail,
-      role : 'user'
+      role : 'user',
     })
-    return user.toJSON() as UserAttributes
+
+    const user = await MtUser.findOne({where: {email : userDetail.email}})
+    if(!user){throw new Error("User not found")}
+    const token = jwt.sign(user.dataValues, this.jwtCode)
+    user.dataValues.token = token
+    await user?.save
+
+    return user?.toJSON() as UserAttributes
   }
 
   async findByUser(req:AuthReq): Promise<UserAttributes>{
