@@ -27,7 +27,7 @@ export class ProductService{
         {model: MtProductGallery, as : 'galleries'}
       ]})
     const jsonResult = datas.map((item) => item.toJSON()) as ProductAttributes[]
-    const formattedData = FormatAll(jsonResult as unknown as ProductAttributes[])
+    const formattedData = FormatAll(jsonResult)
     return formattedData
   } 
 

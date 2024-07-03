@@ -2,7 +2,8 @@
 
 import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
-import TxOrderDetail from './TxOrderDetail';
+import TxOrderDetail, { OrderDetailAttributes } from './TxOrderDetail';
+import { UserAttributes } from './MtUser';
 
 export interface OrderAttributes{
   id: number,
@@ -13,6 +14,8 @@ export interface OrderAttributes{
   shippingPrice : number,
   grandTotal: number,
   status: string, 
+  details?: OrderDetailAttributes[],
+  user? : UserAttributes,
   createdAt?: string,
   updatedAt?: string,
   deletedAt?: string
@@ -81,6 +84,6 @@ TxOrder.init(
   }
 )
 
-TxOrder.hasMany(TxOrderDetail, {foreignKey: 'orderId', sourceKey: 'id', as: 'detail'})
+TxOrder.hasMany(TxOrderDetail, {foreignKey: 'orderId', sourceKey: 'id', as: 'details'})
 
 export default TxOrder

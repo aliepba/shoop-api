@@ -2,6 +2,7 @@
 
 import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
+import MtProduct, { ProductAttributes } from './MtProduct';
 
 export interface OrderDetailAttributes{
   id: number,
@@ -11,6 +12,7 @@ export interface OrderDetailAttributes{
   quantity: number,
   price: number,
   totalPrice: number,
+  product?: ProductAttributes,
   createdAt?: string,
   updatedAt?: string,
   deletedAt?: string
@@ -73,5 +75,7 @@ TxOrderDetail.init(
     paranoid: true,
   }
 )
+
+TxOrderDetail.hasOne(MtProduct, {foreignKey: 'id', sourceKey: 'productId', as : 'product'});
 
 export default TxOrderDetail

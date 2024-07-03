@@ -23,7 +23,6 @@ export interface GalleryFormatter{
 }
 
 export function FormatProduct(product: ProductAttributes): ProductFormatter{
-  console.log(product);
   const format: ProductFormatter = {
     id: product.id,
     name: product.name,
