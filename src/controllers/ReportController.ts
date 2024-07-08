@@ -21,6 +21,18 @@ class ReportController{
       })
     }
   }
+
+  salesReport = async (req: Request, res: Response): Promise<void> => {
+    try{
+      const data = await this.reportService.salesReport()
+      res.json(APIResponse("Success Get Data",  200, 'success', data))
+    }catch(error: any){
+      res.status(500).json({
+        status: "Failed to login",
+        error : error.message
+      })
+    }
+  }
 }
 
 export default ReportController

@@ -68,4 +68,6 @@ export class UserService{
     const data = await MtUser.findByPk(user.id)
     return data?.toJSON() as UserAttributes
   }
+
+  
 }
